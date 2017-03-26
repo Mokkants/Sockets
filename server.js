@@ -9,19 +9,16 @@ const moment = require("moment");
 app.use(express.static(__dirname + "/public"));
 
 io.on("connection", function(socket){
-  console.log("User connected via socket.io");
+  socket.emit("sysMessage",{
+    text:"Welcome to the chat app",
+  });
   let now = moment.utc(moment().valueOf()).local().format("h:mm a");
+  console.log("User connected via socket.io");
 
-    socket.on("message", function(message){
-      console.log("Message recieved: '"+ message.text+"' at "+message.timeStamp);
-      io.emit("message", message);
-    });
-
-    socket.emit("message",{
-      text:"Welcome to the chat app",
-      timeStamp:now
-    });
-
+  socket.on("message", function(message){
+    console.log("Message recieved: '"+ message.text+"' at "+message.timeStamp);
+    io.emit("message", message);
+  });
 });
 
 http.listen(PORT, function(){
