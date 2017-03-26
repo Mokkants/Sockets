@@ -1,6 +1,6 @@
 const socket = io();
 var name=getQueryVariable("name").trim() || "Anonymous";
-var room=getQueryVariable("room");
+var room=getQueryVariable("room") || "Room#1";
 
 
 
