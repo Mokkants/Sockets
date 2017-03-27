@@ -12,6 +12,11 @@ io.on("connection", function(socket){
   socket.emit("sysMessage",{
     text:"Welcome to the chat app",
   });
+
+  io.emit("joinMessage",{
+    now : moment.utc(moment().valueOf()).local().format("h:mm a")
+  });
+
   let now = moment.utc(moment().valueOf()).local().format("h:mm a");
   console.log("User connected via socket.io");
 

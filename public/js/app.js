@@ -1,20 +1,25 @@
 const socket = io();
 var name=getQueryVariable("name").trim() || "Anonymous";
-var room=getQueryVariable("room") || "Room#1";
+var room=getQueryVariable("room") || "Room 1";
 
 
 
 socket.on("connect", function(){
-  let now = moment.utc(moment().valueOf()).local().format("h:mm a");
+  socket.emit()
   setTimeout(function(){
-      jQuery(".messages").append("<p>"+name+" joined "+room+"<i> // "+now+"</i></p>");
+      jQuery(".messages").append();
   },50);
 
 });
 
+socket.on("joinMessage",function(message){
+  let $message = jQuery(".messages");
+  $message.append("<p><strong>"+name+"</strong> joined "+room+"<i> // "+message.now+"</i></p>");
+});
+
 socket.on("sysMessage",function(message){
   let $message = jQuery(".messages");
-  $message.append("<p><strong>"+message.text+"</i></strong></p>");
+  $message.append("<p><strong>"+message.text+"</strong></p>");
 });
 
 socket.on("message", function(message){
