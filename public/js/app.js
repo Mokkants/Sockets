@@ -68,4 +68,6 @@ $nameForm.on("submit",function(event){
     text: "has changed their name to <strong>"+newName+"</strong>"
   });
   name=newName;
+
+  $nameForm.parent().toggle();
 })
